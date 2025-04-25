@@ -13,7 +13,7 @@ import { signUpSchema } from "@/utils/form-validation-schema";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 
-import { UsersLogin } from "@/api/users";
+import { UsersCreate } from "@/api/users";
 
 import { FieldErrorMessage } from "@/components/_common/field-error-message";
 import { merge } from "@/utils/css-important";
@@ -45,19 +45,19 @@ export default function SignUpPage() {
 
     const formSubmit = async (data: SignUpFormData) => {
         setIsLoading(true);
-        // try {
-        //     const apiResponse = await UsersLogin(data.email, data.password);
-        //     if (apiResponse.statusCode === 200) {
-        //         const result = apiResponse?.data;
+        try {
+            const apiResponse = await UsersCreate(data.email, data.username, data.password);
+            if (apiResponse.statusCode === 200) {
+                const result = apiResponse?.data;
 
-        //         // encrypting the auth_token
-        //         SetEncryptedCookie("auth_token", result.accessToken);
-        //     } else {
-        //         toast.error("Invalid Credentials");
-        //     }
-        // } catch (error) {
-        //     toast.error("Invalid Credentials");
-        // }
+                toast.success("User Created Successfully");
+                router.replace('/login');
+            } else {
+                toast.error("Unexpected error, please try again");
+            }
+        } catch (error) {
+            toast.error("Unexpected error, please try again");
+        }
         setIsLoading(false);
     };
 
@@ -65,8 +65,8 @@ export default function SignUpPage() {
         <>
             <title>Sign Up</title>
             <div className="h-auto bg-none">
-                <Card className={merge("px-10 py-28 rounded-lg shadow-none text-center")}>
-                    <Heading as="h1" size="6" className="text-accent-primary">
+                <Card className={merge("!px-6 !py-10 !rounded-lg !shadow-none !text-center")}>
+                    <Heading as="h1" size="7" className="text-accent-primary">
                         Welcome!
                     </Heading>
                     <Text className="font-medium mt-1 text-lg text-center" color="gray">
@@ -78,7 +78,7 @@ export default function SignUpPage() {
                             control={control}
                             errors={errors}
                             name="email"
-                            placeholder="Please Enter Username"
+                            placeholder="Please Enter Email Address"
                             ref={emailInputRef}
                         />
 

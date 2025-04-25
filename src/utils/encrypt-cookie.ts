@@ -43,6 +43,10 @@ export const SetEncryptedCookie = (
   value: any,
   options: any = {}
 ): void => {
+  console.log(key)
+  console.log(value)
+  console.log(options)
+
   const encryptedValue = EncryptString(value);
   const additional_options = {
     maxAge: DEFAULT_MAX_AGE,

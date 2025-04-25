@@ -25,7 +25,6 @@ export default function LoginPage() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-
     const emailInputRef = useRef<HTMLInputElement>(null);
     const passwordInputRef = useRef<HTMLInputElement>(null);
 
@@ -39,20 +38,22 @@ export default function LoginPage() {
         resolver: yupResolver(loginSchema),
     });
 
-
     const formSubmit = async (data: LoginFormData) => {
         setIsLoading(true);
         try {
             const apiResponse = await UsersLogin(data.username, data.password);
             if (apiResponse.statusCode === 200) {
                 const result = apiResponse?.data;
-
+                
                 // encrypting the auth_token
                 SetEncryptedCookie("auth_token", result.accessToken);
+                toast.success("Login Successfully");
+                router.replace("/dashboard")
             } else {
                 toast.error("Invalid Credentials");
             }
         } catch (error) {
+            console.log(error);
             toast.error("Invalid Credentials");
         }
         setIsLoading(false);
