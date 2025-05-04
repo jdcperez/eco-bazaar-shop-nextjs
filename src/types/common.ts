@@ -5,5 +5,5 @@ export type fetchDataProps = {
   mode?: "cors" | "no-cors",
   params: any,
   responseType?: "json" | "blob",
-  method?: "POST" | "GET"
+  method?: "POST" | "GET" | "PATCH" | "DELETE"
 };

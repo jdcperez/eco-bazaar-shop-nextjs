@@ -1,8 +1,8 @@
-import { fetchData } from "..";
+import { CallApi } from "..";
 
 export async function UsersLogin(username: string, password: string) {
   try {
-    const res = await fetchData({
+    const res = await CallApi({
       endpoint: `/users/login`,
       method: "POST",
       params: {
@@ -19,7 +19,7 @@ export async function UsersLogin(username: string, password: string) {
 
 export async function UsersCreate(email: string, username: string, password: string) {
   try {
-    const res = await fetchData({
+    const res = await CallApi({
       endpoint: `/users/register`,
       method: "POST",
       params: {

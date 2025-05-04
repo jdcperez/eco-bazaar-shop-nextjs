@@ -26,3 +26,14 @@ export const signUpSchema = yup.object().shape({
     ),
 });
 //#end region
+
+export type CategoryListProps = {
+  id: number,
+  name: string,
+};
+//#region Category
+export const categoryDetailsSchema = yup.object().shape({
+  id: yup.number().optional(),
+  name: yup.string().required("Category name is required"),
+});
+//#end region

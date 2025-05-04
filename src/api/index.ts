@@ -3,7 +3,7 @@ import { fetchDataProps } from "@/types/common";
 
 const BASE_URL: any = process.env.NEXT_PUBLIC_API_URL;
 
-export async function fetchData({
+export async function CallApi({
   endpoint,
   cache = "force-cache",
   headers,
@@ -21,10 +21,9 @@ export async function fetchData({
     };
 
     // get the decrypted token
-    // const authToken = getDecryptedCookie("auth_token");
-    const authToken = null;
+    const authToken = getDecryptedCookie("auth_token");
     if (authToken) {
-      defaultHeaders["Auth-Token"] = authToken as string;
+      defaultHeaders["Authorization"] = `Bearer ${authToken}` as string;
     }
 
     const options: RequestInit = {
@@ -36,7 +35,6 @@ export async function fetchData({
     if (method !== "GET") {
       options.body = JSON.stringify(params);
     }
-    console.log(`${BASE_URL}${endpoint}`)
 
     const response = await fetch(`${BASE_URL}${endpoint}`, options);
 

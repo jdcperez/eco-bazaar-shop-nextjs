@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect, useState } from "react";
 
-export default function MainLayout({
+export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

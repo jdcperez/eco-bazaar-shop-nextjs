@@ -42,10 +42,12 @@ export default function LoginPage() {
         setIsLoading(true);
         try {
             const apiResponse = await UsersLogin(data.username, data.password);
+            console.log("apiResponse", apiResponse)
             if (apiResponse.statusCode === 200) {
                 const result = apiResponse?.data;
-                
+
                 // encrypting the auth_token
+                console.log("result", result);
                 SetEncryptedCookie("auth_token", result.accessToken);
                 toast.success("Login Successfully");
                 router.replace("/dashboard")
