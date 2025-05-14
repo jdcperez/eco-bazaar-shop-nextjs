@@ -5,15 +5,13 @@ import { useRouter } from "next/navigation";
 import { Box, Flex, Table } from "@radix-ui/themes";
 import { Button } from "@radix-ui/themes/components/button";
 import { Plus } from "lucide-react";
-import CategoryDetails from "./_components/category-details";
-import { useCategoryStore } from "@/store/category-store";
+import CategoryDetails from "./_components/product-details";
 import { CategoryListProps } from "@/types/category";
-import { useCategoryAddStore } from "./_store/category-store";
+import { useCategoryStore } from "@/store/category-store";
 import Pagination from "@/components/_common/pagination";
 
-export default function CategoryPage() {
+export default function ProductPage() {
   const router = useRouter();
-  const { isCategoryAdd, setIsCategoryAdd } = useCategoryAddStore();
   const { category, categoryLoading, fetchCategory } = useCategoryStore();
 
   useEffect(() => {

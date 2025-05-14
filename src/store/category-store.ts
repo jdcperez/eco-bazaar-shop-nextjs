@@ -23,15 +23,11 @@ export const useCategoryStore = create<CategoryStore>((set) => ({
             if (apiResponse.statusCode === 200) {
                 const result = apiResponse.data;
 
-                console.log(result);
-
-                console.log(result.categories);
                 const categories: CategoryListProps[] = result.categories.map((category: any) => ({
                     id: category._id,
                     name: category.name,
                 }));
 
-                console.log(categories);
                 set({ category: categories });
             }
             else {
